@@ -12,15 +12,13 @@ import {
     Link,
     Badge,
     AspectRatio,
-    Skeleton
+    Skeleton,
+    Divider
 } from "@chakra-ui/react";
 import PrettyDate from "./PrettyDate";
+import CleanTitle from "./CleanTitle";
+import RelatedContent from "./RelatedContent";
 
-const cleanTitle = (title) => {
-    return String(title)
-        .replace(/&apos;/g, '\'')
-        .replace(/&quot;/g, '"')
-}
 
 const CustomHit = ({ hit, sendEvent }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -31,9 +29,9 @@ const CustomHit = ({ hit, sendEvent }) => {
                 <LinkOverlay onClick={onOpen}>
                     <VStack align="left">
                         <Image src={hit.image} alt={hit.ldJsonData.name} borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })} />
-                        <Heading size="md">{cleanTitle(hit.ldJsonData.name)}</Heading>
+                        <Heading size="md"><CleanTitle title={hit.ldJsonData.name} /></Heading>
                         <Text>{hit.author}</Text>
-                        <Text>Published in: <PrettyDate date={hit.releaseDate} /></Text>
+                        <PrettyDate date={hit.releaseDate} />
                     </VStack>
                 </LinkOverlay>
             </LinkBox>
@@ -44,22 +42,17 @@ const CustomHit = ({ hit, sendEvent }) => {
                     <ModalCloseButton />
                     <ModalBody pt={12} pb={6}>
                         <Box position="relative">
-                            {/*<Image src={hit.image} alt={hit.ldJsonData.name} borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })} /> */}
-
                             <AspectRatio ratio={16 / 9} fallback={Skeleton}>
                                 <iframe title={hit.title} src={`https://embed.ted.com/talks/lang/en/${hit.objectID}`} frameBorder="0" scrolling="no" allowFullScreen></iframe>
                             </AspectRatio>
-
                         </Box>
                         <Text mt={3}>{hit.description}</Text>
-                        <Text mt={3}>Published in: <PrettyDate date={hit.releaseDate} /></Text>
+                        <Text mt={3} mb={6}>
+                            Publish Date: <PrettyDate date={hit.releaseDate} />
+                        </Text>
+                        <Divider />
+                        <RelatedContent currentObjectID={hit.objectID} />
                     </ModalBody>
-
-                    {/*<ModalFooter>
-                        <Button colorScheme='red'>
-                            <Link href={hit.url} isExternal _hover={{ textDecoration: 'none' }}>View this talk</Link>
-                        </Button>
-                    </ModalFooter> */}
                 </ModalContent>
             </Modal>
         </GridItem >

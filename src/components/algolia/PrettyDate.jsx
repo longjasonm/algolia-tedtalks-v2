@@ -1,6 +1,6 @@
 import React from "react";
 
-const PrettyDate = ({ date }) => {
+const PrettyDate = ({ date, ...props }) => {
     const prettyDate = new Date(date * 1000).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',

@@ -13,10 +13,12 @@ import {
     Badge,
     AspectRatio,
     Skeleton,
-    Divider
+    Divider,
+    HStack
 } from "@chakra-ui/react";
 import PrettyDate from "./PrettyDate";
-import CleanTitle from "./CleanTitle";
+import { PrettyTime } from "./PrettyTime";
+import PrettyTitle from "./PrettyTitle";
 import RelatedContent from "./RelatedContent";
 
 
@@ -25,13 +27,13 @@ const CustomHit = ({ hit, sendEvent }) => {
 
     return (
         <GridItem pb={6}>
-            <LinkBox as={Box}>
+            <LinkBox as={Box} cursor="pointer" borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })}>
                 <LinkOverlay onClick={onOpen}>
-                    <VStack align="left">
+                    <VStack align="left" spacing={2}>
                         <Image src={hit.image} alt={hit.ldJsonData.name} borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })} />
-                        <Heading size="md"><CleanTitle title={hit.ldJsonData.name} /></Heading>
-                        <Text>{hit.author}</Text>
-                        <PrettyDate date={hit.releaseDate} />
+                        <Text fontFamily={'Georgia, serif'} fontStyle="italic" fontSize="0.8rem">{hit.author}</Text>
+                        <Heading size="md" fontWeight="700" letterSpacing=""><PrettyTitle title={hit.ldJsonData.name} /></Heading>
+                        <Text fontSize="0.8rem"><b>Posted </b><PrettyDate date={hit.releaseDate} /></Text>
                     </VStack>
                 </LinkOverlay>
             </LinkBox>
@@ -47,9 +49,13 @@ const CustomHit = ({ hit, sendEvent }) => {
                             </AspectRatio>
                         </Box>
                         <Text mt={3}>{hit.description}</Text>
-                        <Text mt={3} mb={6}>
-                            Publish Date: <PrettyDate date={hit.releaseDate} />
-                        </Text>
+                        <HStack spacing={3} mt={3} mb={6}>
+
+                            <Text><b>Posted: </b><PrettyDate ml={3} date={hit.releaseDate} /></Text>
+                            <Text><b>Duration: </b><PrettyTime ml={3} time={hit.duration} /></Text>
+
+                        </HStack>
+
                         <Divider />
                         <RelatedContent currentObjectID={hit.objectID} />
                     </ModalBody>

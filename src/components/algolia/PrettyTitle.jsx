@@ -1,9 +1,10 @@
 import React from "react";
 
-const CleanTitle = ({ title }) => {
+const PrettyTitle = ({ title }) => {
     return String(title)
         .replace(/&apos;/g, '\'')
         .replace(/&quot;/g, '"')
+        .replace(/--/g, '—')
 }
 
-export default CleanTitle;
+export default PrettyTitle;

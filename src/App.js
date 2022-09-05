@@ -3,31 +3,18 @@ import {
   ChakraProvider,
   Box,
   Flex,
-  Text,
-  Link,
-  VStack,
-  Code,
   Grid,
   theme,
   HStack,
-  Stack,
   Heading,
   Center,
-  Divider,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Spacer
 } from '@chakra-ui/react';
-import { Search2Icon } from '@chakra-ui/icons';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './components/Logo';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox } from 'react-instantsearch-hooks-web';
-import CustomSearchBox from './components/algolia/CustomSearchbox';
+import { InstantSearch } from 'react-instantsearch-hooks-web';
 import CustomHits from './components/algolia/CustomHits';
 import Autocomplete from './components/algolia/Autocomplete.tsx';
-import CustomFacets from './components/algolia/CustomFacets';
 import CustomRefinementList from './components/algolia/CustomRefinementList';
 import CustomClearRefinementButton from './components/algolia/CustomClearRefinementButton';
 import CustomDurationMenu from './components/algolia/CustomDurationMenu';

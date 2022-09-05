@@ -7,13 +7,12 @@ import {
     useState,
     useMemo
 } from "react";
-import { render } from "react-dom";
 import { createRoot } from "react-dom/client";
 
 import { usePagination, useSearchBox } from "react-instantsearch-hooks";
 import { autocomplete, AutocompleteOptions } from "@algolia/autocomplete-js";
 import { BaseItem } from "@algolia/autocomplete-core";
-import { Box, Input, forwardRef, Divider } from "@chakra-ui/react";
+import { Box, Divider } from "@chakra-ui/react";
 import { createLocalStorageRecentSearchesPlugin } from "@algolia/autocomplete-plugin-recent-searches";
 import { createQuerySuggestionsPlugin } from "@algolia/autocomplete-plugin-query-suggestions";
 

@@ -30,6 +30,8 @@ import Autocomplete from './components/algolia/Autocomplete.tsx';
 import CustomFacets from './components/algolia/CustomFacets';
 import CustomRefinementList from './components/algolia/CustomRefinementList';
 import CustomClearRefinementButton from './components/algolia/CustomClearRefinementButton';
+import CustomDurationMenu from './components/algolia/CustomDurationMenu';
+// import CustomCurrentRefinements from './components/algolia/CustomCurrentRefinements';
 
 const searchClient = algoliasearch('JINA8T7GLB', 'cccd3ff2b3aaa504c5028daee311d2ea');
 
@@ -61,6 +63,7 @@ function App() {
               <HStack spacing={3} align="left">
                 <CustomRefinementList attribute={'keywords'} title="Keywords" searchable={true} />
                 <CustomRefinementList attribute={'author'} title="Speakers" searchable={true} />
+                <CustomDurationMenu attribute={'duration'} title="Duration" />
                 <CustomClearRefinementButton />
               </HStack>
             </Box>

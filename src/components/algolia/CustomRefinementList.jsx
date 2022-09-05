@@ -13,7 +13,8 @@ import {
     Input,
     Button,
     Text,
-    VStack
+    VStack,
+    StatHelpText
 } from "@chakra-ui/react";
 
 const CustomRefinementList = ({ attribute, title, searchable }) => {
@@ -31,26 +32,26 @@ const CustomRefinementList = ({ attribute, title, searchable }) => {
             </PopoverTrigger>
             <PopoverContent>
                 <PopoverBody>
-                    {searchable && (<Input my={3} placeholder={(`Search for ${title}`)} onChange={e => searchForItems(e.target.value)} />)}
+                    {searchable && (<Input my={2} placeholder={(`Search for ${title}`)} onChange={e => searchForItems(e.target.value)} />)}
 
-                    <CheckboxGroup>
-                        <VStack align="left">
-                            {items.map((item) => (
+                    <VStack align="left">
+                        {items.map((item) => (
 
-                                <Checkbox
-                                    key={item.label}
-                                    value={item.label}
-                                    isChecked={item.isRefined}
-                                    onChange={() => refine(item.value)}
-                                >
-                                    {item.isRefined ? (<Text as="b">{item.label} ({item.count})</Text>) : (<Text>{item.label} ({item.count})</Text>)}
-                                </Checkbox>
-                            ))}
-                        </VStack>
-                    </CheckboxGroup>
+                            <Checkbox
+                                key={item.label}
+                                value={item.label}
+                                isChecked={item.isRefined}
+                                onChange={() => {
+                                    refine(item.value)
+                                }}
+                            >
+                                <Text fontWeight={item.isRefined ? 'bold' : ''}>{item.label} ({item.count})</Text>
+                            </Checkbox>
+                        ))}
+                    </VStack>
                 </PopoverBody>
             </PopoverContent>
-        </Popover>
+        </Popover >
 
     );
 }

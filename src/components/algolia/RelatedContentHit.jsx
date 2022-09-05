@@ -6,7 +6,7 @@ const RelatedContentHit = ({ hit }) => {
     return (
         <GridItem>
             <LinkBox>
-                <LinkOverlay href={hit.url}>
+                <LinkOverlay href={hit.url} title={hit.description}>
                     <Image src={hit.image} alt={hit.title} borderRadius="md" />
                     <Text fontWeight={500}>
                         <PrettyTitle title={hit.ldJsonData.name} />

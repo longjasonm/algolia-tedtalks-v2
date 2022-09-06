@@ -29,15 +29,18 @@ const CustomDurationMenu = ({ attribute, title }) => {
     });
 
     return (
-        <Popover placement="bottom-start">
+        <Popover placement="bottom">
             <PopoverTrigger>
-                <Button borderRadius="md" colorScheme="red" variant="outline">
+                <Button m={2} borderRadius="md" colorScheme="red" variant="outline">
                     {title}
                 </Button>
 
             </PopoverTrigger>
             <PopoverContent>
-                <PopoverBody>
+                <PopoverArrow />
+                <PopoverCloseButton display={['block', 'none']} />
+                <PopoverHeader display={['block', 'none']} textAlign="center" fontStyle="italic" color="gray.400">Tap to apply filters</PopoverHeader>
+                <PopoverBody p={[null, 2, 4]}>
                     <VStack align="left">
                         {items.map((item) => (
 

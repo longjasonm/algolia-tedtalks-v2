@@ -14,38 +14,54 @@ import {
     AspectRatio,
     Skeleton,
     Divider,
-    HStack
+    HStack,
 } from "@chakra-ui/react";
 import PrettyDate from "./PrettyDate";
-import { PrettyTime } from "./PrettyTime";
+import PrettyTime from "./PrettyTime";
 import PrettyTitle from "./PrettyTitle";
 import RelatedContent from "./RelatedContent";
 
+const OverlayOne = () => (
+    <ModalOverlay
+        bg='blackAlpha.300'
+        backdropFilter='blur(10px)'
+    />
+)
 
 const CustomHit = ({ hit, sendEvent }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [overlay, setOverlay] = React.useState(<OverlayOne />)
+
 
     return (
-        <GridItem pb={6}>
-            <LinkBox as={Box} cursor="pointer" borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })}>
-                <LinkOverlay onClick={onOpen}>
-                    <VStack align="left" spacing={2}>
-                        <Image src={hit.image} alt={hit.ldJsonData.name} borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })} />
-                        <Text fontFamily={'Georgia, serif'} fontStyle="italic" fontSize="0.8rem">{hit.author}</Text>
-                        <Heading size="md" fontWeight="700" letterSpacing=""><PrettyTitle title={hit.ldJsonData.name} /></Heading>
-                        <Text fontSize="0.8rem"><b>Posted </b><PrettyDate date={hit.releaseDate} /></Text>
+        <LinkBox cursor="pointer">
+            <GridItem pb={6} boxShadow="sm" background="white" transition="all 0.2s ease-in-out" _hover={{ "boxShadow": "2xl", "transition": "all 0.2s ease-in-out", "transform": "scale(1.03)" }} borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })} h="full">
+                <LinkOverlay onClick={() => {
+                    setOverlay(<OverlayOne />)
+                    onOpen()
+                }}>
+                    <VStack align="left">
+                        <Box position="relative">
+                            <Image src={hit.image} alt={hit.ldJsonData.name} borderTopRadius={useBreakpointValue({ base: 'md', md: 'xl' })} />
+                            <Box position="absolute" bottom={0} right={0} m={2}>{hit.duration && (<Badge colorScheme="gray" borderRadius="md" px="1.5" py="0.5" fontSize="0.6em" fontWeight="bold"><PrettyTime time={hit.duration} /></Badge>)}</Box>
+                        </Box>
+                        <Box p={3}>
+                            <Text fontFamily={'Georgia, serif'} fontStyle="italic" fontSize="0.8rem">{hit.author}</Text>
+                            <Heading size="md" fontWeight="700" letterSpacing=""><PrettyTitle title={hit.ldJsonData.name} /></Heading>
+                            <Text fontSize="0.8rem" mt={2}><PrettyDate date={hit.releaseDate} /></Text>
+                        </Box>
                     </VStack>
                 </LinkOverlay>
-            </LinkBox>
-            <Modal isOpen={isOpen} size={useBreakpointValue({ base: 'xl', md: '2xl', lg: '3xl' })} onClose={onClose}>
-                <ModalOverlay />
+            </GridItem>
+
+            <Modal isCentered isOpen={isOpen} size={useBreakpointValue({ base: 'xl', md: '2xl' })} onClose={onClose}>
+                {overlay}
                 <ModalContent>
-                    {/*<ModalHeader>{hit.title}</ModalHeader> */}
                     <ModalCloseButton />
                     <ModalBody pt={12} pb={6}>
                         <Box position="relative">
                             <AspectRatio ratio={16 / 9} fallback={Skeleton}>
-                                <iframe title={hit.title} src={`https://embed.ted.com/talks/lang/en/${hit.objectID}`} frameBorder="0" scrolling="no" allowFullScreen></iframe>
+                                <iframe title={hit.title} src={`https://embed.ted.com/talks/lang/en/${hit.objectID}`} frameBorder="0" scrolling="no" allowFullScreen onClick={() => sendEvent('conversion', hit, 'Video Played')}></iframe>
                             </AspectRatio>
                         </Box>
                         <Text mt={3}>{hit.description}</Text>
@@ -61,7 +77,7 @@ const CustomHit = ({ hit, sendEvent }) => {
                     </ModalBody>
                 </ModalContent>
             </Modal>
-        </GridItem >
+        </LinkBox>
 
     );
 }

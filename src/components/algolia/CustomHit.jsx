@@ -34,14 +34,17 @@ const CustomHit = ({ hit, sendEvent }) => {
 
 
     return (
-        <LinkBox as='Box' cursor="pointer" >
+        <LinkBox cursor="pointer" >
             <GridItem pb={6} boxShadow="sm" background="white" transition="all 0.2s ease-in-out" _hover={{ "boxShadow": "2xl", "transition": "all 0.2s ease-in-out", "transform": "scale(1.03)" }} borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })} h="full">
                 <LinkOverlay onClick={() => {
                     setOverlay(<OverlayOne />)
                     onOpen()
                 }}>
                     <VStack align="left">
-                        <Image src={hit.image} alt={hit.ldJsonData.name} borderTopRadius={useBreakpointValue({ base: 'md', md: 'xl' })} />
+                        <Box position="relative">
+                            <Image src={hit.image} alt={hit.ldJsonData.name} borderTopRadius={useBreakpointValue({ base: 'md', md: 'xl' })} />
+                            <Box position="absolute" bottom={0} right={0} m={2}>{hit.duration && (<Badge colorScheme="gray" borderRadius="md" px="1.5" py="0.5" fontSize="0.6em" fontWeight="bold"><PrettyTime time={hit.duration} /></Badge>)}</Box>
+                        </Box>
                         <Box p={3}>
                             <Text fontFamily={'Georgia, serif'} fontStyle="italic" fontSize="0.8rem">{hit.author}</Text>
                             <Heading size="md" fontWeight="700" letterSpacing=""><PrettyTitle title={hit.ldJsonData.name} /></Heading>

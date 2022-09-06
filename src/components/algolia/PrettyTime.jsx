@@ -1,6 +1,3 @@
-import React from "react";
-import { Box } from "@chakra-ui/react";
-
 export function PrettyTime({ time, props }) {
 
     const h = Math.floor(time / 3600).toString().padStart(2, '0'),

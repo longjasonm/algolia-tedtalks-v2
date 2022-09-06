@@ -24,6 +24,7 @@
     "react-icons": "^3.0.0",
     "react-instantsearch-hooks-web": "^6.32.1",
     "react-scripts": "5.0.1",
+    "search-insights": "^2.2.1",
     "typescript": "^4.8.2",
     "web-vitals": "^2.1.4"
   },

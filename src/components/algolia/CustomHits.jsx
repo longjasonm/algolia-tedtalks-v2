@@ -14,7 +14,6 @@ function CustomHits(props) {
         sendEvent } = useInfiniteHits(props);
     return (
         <VStack spacing={3}>
-            <Text>Showing {hits.length} of {results.nbHits} results</Text>
             <SimpleGrid columns={[1, 2, 4]} gap={6}>
                 {hits.map(hit => {
                     return (
@@ -22,6 +21,7 @@ function CustomHits(props) {
                     )
                 })}
             </SimpleGrid>
+            <Text>Showing {hits.length} of {results.nbHits} results</Text>
             <Center>{!isLastPage && <Button colorScheme="red" size="lg" onClick={showMore}>See more results</Button>}</Center>
         </VStack>
     );

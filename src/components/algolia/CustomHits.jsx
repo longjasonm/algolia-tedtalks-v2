@@ -11,13 +11,14 @@ function CustomHits(props) {
         isLastPage,
         showPrevious,
         showMore,
-        sendEvent } = useInfiniteHits(props);
+        sendEvent
+    } = useInfiniteHits(props);
     return (
         <VStack spacing={3}>
-            <SimpleGrid columns={[1, 2, 4]} gap={6}>
+            <SimpleGrid columns={[1, 2, 4, 6]} gap={6}>
                 {hits.map(hit => {
                     return (
-                        <CustomHit fallback={Skeleton} key={hit.objectID} hit={hit} sendEvent={sendEvent} />
+                        <CustomHit fallback={Skeleton} key={hit.objectID} hit={hit} sendEvent={sendEvent('click', hit, 'Item Clicked')} />
                     )
                 })}
             </SimpleGrid>

@@ -17,7 +17,7 @@ import {
     HStack,
 } from "@chakra-ui/react";
 import PrettyDate from "./PrettyDate";
-import { PrettyTime } from "./PrettyTime";
+import PrettyTime from "./PrettyTime";
 import PrettyTitle from "./PrettyTitle";
 import RelatedContent from "./RelatedContent";
 
@@ -34,7 +34,7 @@ const CustomHit = ({ hit, sendEvent }) => {
 
 
     return (
-        <LinkBox cursor="pointer" >
+        <LinkBox cursor="pointer">
             <GridItem pb={6} boxShadow="sm" background="white" transition="all 0.2s ease-in-out" _hover={{ "boxShadow": "2xl", "transition": "all 0.2s ease-in-out", "transform": "scale(1.03)" }} borderRadius={useBreakpointValue({ base: 'md', md: 'xl' })} h="full">
                 <LinkOverlay onClick={() => {
                     setOverlay(<OverlayOne />)
@@ -54,14 +54,14 @@ const CustomHit = ({ hit, sendEvent }) => {
                 </LinkOverlay>
             </GridItem>
 
-            <Modal isCentered isOpen={isOpen} size={useBreakpointValue({ base: 'xl', md: '2xl', lg: '3xl' })} onClose={onClose} scrollBehavior={['outside', 'inside']}>
+            <Modal isCentered isOpen={isOpen} size={useBreakpointValue({ base: 'xl', md: '2xl' })} onClose={onClose}>
                 {overlay}
                 <ModalContent>
                     <ModalCloseButton />
                     <ModalBody pt={12} pb={6}>
                         <Box position="relative">
                             <AspectRatio ratio={16 / 9} fallback={Skeleton}>
-                                <iframe title={hit.title} src={`https://embed.ted.com/talks/lang/en/${hit.objectID}`} frameBorder="0" scrolling="no" allowFullScreen></iframe>
+                                <iframe title={hit.title} src={`https://embed.ted.com/talks/lang/en/${hit.objectID}`} frameBorder="0" scrolling="no" allowFullScreen onClick={() => sendEvent('conversion', hit, 'Video Played')}></iframe>
                             </AspectRatio>
                         </Box>
                         <Text mt={3}>{hit.description}</Text>

@@ -54,7 +54,7 @@ const CustomHit = ({ hit, sendEvent }) => {
                 </LinkOverlay>
             </GridItem>
 
-            <Modal isCentered isOpen={isOpen} size={useBreakpointValue({ base: 'xl', md: '2xl' })} onClose={onClose}>
+            <Modal isOpen={isOpen} size={useBreakpointValue({ base: 'lg', md: '2xl' })} onClose={onClose}>
                 {overlay}
                 <ModalContent>
                     <ModalCloseButton />

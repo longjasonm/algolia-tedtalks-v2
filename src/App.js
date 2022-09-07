@@ -45,9 +45,9 @@ function App() {
       <InstantSearch searchClient={searchClient} indexName="TEDTalks_talks_v2" routing>
         <Configure hitsPerPage={24} clickAnalytics={true} getRankingInfo={true} />
         <Box mx="auto" background="gray.100">
-          <Grid spacing={6} justify="center">
+          <Grid gap={3}>
             <SiteHeader searchClient={searchClient} />
-            <Box w="100%" p={3} >
+            <Box w="100%" p={3}>
               <Center mb={[1, 2]}>Filter your results by:</Center>
               <Flex spacing={3} justify="center" flexDirection={["column", "row"]}>
                 <CustomRefinementList attribute={'keywords'} title="Keywords" searchable={true} />
@@ -56,7 +56,7 @@ function App() {
                 <CustomClearRefinementButton />
               </Flex>
             </Box>
-            <Box w="100%" p={3}>
+            <Box w="100%" p={3} px={[null, null, 12, 24]}>
               <CustomHits />
             </Box>
           </Grid>
